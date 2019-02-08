@@ -6,8 +6,16 @@
  * Time: 22:42
  */
 
+/**
+ * Class TM_User
+ */
 class TM_User extends TM_Data {
 
+    /**
+     * Unique fetch to create TM_Data object from sql data.
+     * @param $mixed
+     * @return mixed|void
+     */
     protected function fetch( $mixed ) {
 
         $data = false;
@@ -27,6 +35,11 @@ class TM_User extends TM_Data {
 
     }
 
+    /**
+     * Unique filter to prepare sql data for TM_User constructor.
+     * @param $result
+     * @return mixed|void
+     */
     protected function raw_filter( &$result ) {
 
         if( is_int( (int) $result->id ) ) {
@@ -63,16 +76,6 @@ class TM_User extends TM_Data {
         $result->role = new TM_Role( $result->role_id );
 
         unset( $result->role_id );
-
-    }
-
-    public function get( $key ) {
-
-        if( isset( $key ) && property_exists( $this->data, $key ) )
-
-            return $this->data->{$key};
-
-        return false;
 
     }
 

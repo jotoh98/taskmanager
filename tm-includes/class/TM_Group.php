@@ -1,13 +1,21 @@
 <?php
 /**
- * Created by PhpStorm.
+ * TM_Group Class File
  * User: jotoh
  * Date: 2019-02-08
  * Time: 02:34
  */
 
+/**
+ * Class TM_Group
+ */
 class TM_Group extends TM_Data {
 
+    /**
+     * Unique fetch to create TM_Group object from sql data.
+     * @param $id
+     * @return mixed|void
+     */
     protected function fetch( $id ) {
 
         if( !is_int( $id ) ) return;
@@ -23,6 +31,11 @@ class TM_Group extends TM_Data {
         $this->init( $data );
     }
 
+    /**
+     * Unique filter to prepare sql data for TM_Group constructor.
+     * @param $result
+     * @return mixed|void
+     */
     protected function raw_filter( &$result ) {
 
         $pre = tmdb_pre();
@@ -45,7 +58,10 @@ class TM_Group extends TM_Data {
 
     }
 
-
+    /**
+     * Get numeric Array of TM_Group ids.
+     * @return array|bool|mixed|object|stdClass
+     */
     public function get_children() {
         
         $pre = tmdb_pre();
@@ -54,6 +70,11 @@ class TM_Group extends TM_Data {
         
     }
 
+    /**
+     * Add children to TM_Group in database.
+     * @param int $id
+     * @return bool
+     */
     public function add_children( $id = -1 ) {
         $parentID = -1;
         if( $this instanceof TM_Group)

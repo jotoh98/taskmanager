@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="taskmanager@localhost" uuid="f7dc1b75-200f-4cc3-9acb-c1c78e34463e">
+    <data-source source="LOCAL" name="taskmanager@localhost" uuid="5ec8e39f-f31e-40be-b728-bf3f298b5063">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/taskmanager</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:8889/taskmanager</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

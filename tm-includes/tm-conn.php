@@ -1,6 +1,4 @@
 <?php
-require_once(dirname(__DIR__).'/tm-config.php');
-
 /**
  * set the locale
  */
@@ -21,9 +19,6 @@ textdomain("lang");
 if(empty($tm_db_user))
     die(_('No username for database connection given'));
 
-if(empty($tm_db_pass))
-    die(_('No password for database connection given'));
-
 if(empty($tm_db_name))
     die(_('No database name given'));
 
@@ -39,5 +34,3 @@ if($tmdb->connect_error)
     die(_('Database connection error').'('.$tmdb->connect_errno.')');
 elseif (TM_DEBUG)
     echo _('Database connection established').'<br>';
-
-require_once(__DIR__.'/tm-functions.php');

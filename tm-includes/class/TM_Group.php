@@ -18,17 +18,18 @@ class TM_Group extends TM_Data {
      */
     protected function fetch( $id ) {
 
+        global $tm_db_prefix;
+
         if( !is_int( $id ) ) return;
         
-        $pre = tmdb_pre();
-        
-        $data = tmdb_fetch_obj( "SELECT * FROM {$pre}group WHERE id={$id}" );
+        $data = tmdb_fetch_obj( "SELECT * FROM {$tm_db_prefix}group WHERE id={$id}" );
 
         if( !is_int( (int) $data->id ) ) return;
 
         $this->raw_filter( $data );
 
         $this->init( $data );
+
     }
 
     /**
@@ -38,12 +39,12 @@ class TM_Group extends TM_Data {
      */
     protected function raw_filter( &$result ) {
 
-        $pre = tmdb_pre();
+        global $tm_db_prefix;
         
         $members = tmdb_fetch_num(
-            "SELECT {$pre}user.id FROM {$pre}user
-                    LEFT JOIN {$pre}user_in_group ON {$pre}user.id = {$pre}user_in_group.user_id
-                    WHERE {$pre}user_in_group.group_id={$result->id}"
+            "SELECT {$tm_db_prefix}user.id FROM {$tm_db_prefix}user
+                    LEFT JOIN {$tm_db_prefix}user_in_group ON {$tm_db_prefix}user.id = {$tm_db_prefix}user_in_group.user_id
+                    WHERE {$tm_db_prefix}user_in_group.group_id={$result->id}"
         );
 
         $result->members = array_map( function($e) {
@@ -64,9 +65,9 @@ class TM_Group extends TM_Data {
      */
     public function get_children() {
         
-        $pre = tmdb_pre();
+        global $tm_db_prefix;
         
-        return tmdb_fetch_num( "SELECT child FROM {$pre}group_composite WHERE parent={$this->id}" );
+        return tmdb_fetch_num( "SELECT child FROM {$tm_db_prefix}group_composite WHERE parent={$this->id}" );
         
     }
 
@@ -76,19 +77,21 @@ class TM_Group extends TM_Data {
      * @return bool
      */
     public function add_children( $id = -1 ) {
+
+        global $tm_db_prefix;
+
         $parentID = -1;
+
         if( $this instanceof TM_Group)
             $parentID = $this->id;
 
         if( $id < 0 || $parentID < 0 )
             return false;
-
-        $pre = tmdb_pre();
         
-        $test = tmdb_prepare( "SELECT COUNT(parent) FROM {$pre}group_composite WHERE parent={$parentID} AND child=?" );
+        $test = tmdb_prepare( "SELECT COUNT(parent) FROM {$tm_db_prefix}group_composite WHERE parent={$parentID} AND child=?" );
         $test->bind_param("i", $child);
 
-        $res = tmdb_prepare( "INSERT INTO {$pre}group_composite (parent, child) VALUES ({$parentID},?)");
+        $res = tmdb_prepare( "INSERT INTO {$tm_db_prefix}group_composite (parent, child) VALUES ({$parentID},?)");
         $res->bind_param("i", $child);
 
 
@@ -108,7 +111,7 @@ class TM_Group extends TM_Data {
         $test->close();
         $res->close();
 
-
+        return true;
     }
 
 }

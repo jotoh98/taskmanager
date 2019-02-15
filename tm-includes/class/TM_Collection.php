@@ -1,18 +1,18 @@
 <?php
 /**
- * TM_Group Class File
+ * TM_Collection Class File
  * User: jotoh
  * Date: 2019-02-08
  * Time: 02:34
  */
 
 /**
- * Class TM_Group
+ * Class TM_Collection
  */
-class TM_Group extends TM_Data {
+class TM_Collection extends TM_Data {
 
     /**
-     * Unique fetch to create TM_Group object from sql data.
+     * Unique fetch to create TM_Collection object from sql data.
      * @param $id
      * @return mixed|void
      */
@@ -33,7 +33,7 @@ class TM_Group extends TM_Data {
     }
 
     /**
-     * Unique filter to prepare sql data for TM_Group constructor.
+     * Unique filter to prepare sql data for TM_Collection constructor.
      * @param $result
      * @return mixed|void
      */
@@ -60,19 +60,19 @@ class TM_Group extends TM_Data {
     }
 
     /**
-     * Get numeric Array of TM_Group ids.
+     * Get numeric Array of TM_Collection ids.
      * @return array|bool|mixed|object|stdClass
      */
     public function get_children() {
         
         global $tm_db_prefix;
         
-        return tmdb_fetch_num( "SELECT child FROM {$tm_db_prefix}group_composite WHERE parent={$this->id}" );
+        return tmdb_fetch_num( "SELECT child FROM {$tm_db_prefix}group_composite WHERE parent={$this->ID}" );
         
     }
 
     /**
-     * Add children to TM_Group in database.
+     * Add children to TM_Collection in database.
      * @param int $id
      * @return bool
      */
@@ -82,8 +82,8 @@ class TM_Group extends TM_Data {
 
         $parentID = -1;
 
-        if( $this instanceof TM_Group)
-            $parentID = $this->id;
+        if( $this instanceof TM_Collection)
+            $parentID = $this->ID;
 
         if( $id < 0 || $parentID < 0 )
             return false;
@@ -96,7 +96,7 @@ class TM_Group extends TM_Data {
 
 
         foreach (func_get_args() as $child) {
-            if( $child instanceof TM_Group )
+            if( $child instanceof TM_Collection )
                 $child = $child->ID;
 
 

@@ -31,6 +31,6 @@ if(empty($tm_db_host))
 $tmdb = new mysqli($tm_db_host, $tm_db_pass, $tm_db_user, $tm_db_name);
 
 if($tmdb->connect_error)
-    die(_('Database connection error').'('.$tmdb->connect_errno.')');
-elseif (TM_DEBUG)
-    echo _('Database connection established').'<br>';
+    die(_('Database connection error').' ('.$tmdb->connect_errno.')');
+elseif(TM_DEBUG)
+    array_push($tm_console_arr, _('Database Connection established'));

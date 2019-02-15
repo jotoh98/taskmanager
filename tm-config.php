@@ -34,10 +34,10 @@ define('TM_DEBUG', true);
  * Technical setup
  */
 
-$tm_host_path = '/taskmanager/';
+$tm_host_path = 'taskmanager';
 
 $tm_db_prefix = 'tm_';
 
-$tm_includes_path = '/tm-includes/';
+$tm_includes_path = 'tm-includes';
 
-$tm_content_path = '/tm-content/';
+$tm_content_path = 'tm-content';

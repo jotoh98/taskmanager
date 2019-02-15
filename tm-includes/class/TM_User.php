@@ -24,8 +24,8 @@ class TM_User extends TM_Data {
          * Check if given ident is id or username.
          * And fetch a single object.
          */
-        $ask_row = ( is_int( $mixed ) ? "id" : "username");
-        $data = tmdb_fetch_obj("SELECT * FROM {$tm_db_prefix}user WHERE {$ask_row}='{$mixed}'", true );
+        $asked_row = ( is_int( $mixed ) ? "id" : "username");
+        $data = tmdb_fetch_obj("SELECT * FROM {$tm_db_prefix}user WHERE {$asked_row}='{$mixed}'", true );
 
         if ( !$data ) return;
 
